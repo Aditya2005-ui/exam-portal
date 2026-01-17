@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login Page</title>
+      <style>
+        marquee{
+            font-size:30px;
+        }
+        form{  
+          width: 400px;
+          margin: 50px auto;
+          padding: 30px;
+          background-color:rgb(193, 129, 51);
+          border: 2px solid #333;
+          border-radius: 15px;       
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          text-align: center;
+        }
+        body{
+            background-color:bisque ;
+        }
+
+    </style>
+</head>
+<body>
+    <marquee direction="left" scrollamount="5" >Welcome to Exam Portal</marquee>
+
+<form method="GET">
+    <h2>Who are You?</h2>
+
+    <input type="submit" value="Teacher" formaction="/mcq/teach_login/">
+    <input type="submit" value="Student" formaction="/mcq/stu_login/">
+</form>
+
+  
+       
+</body>
+</html>

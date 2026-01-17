@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Results</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f7ff;
+            padding:20px;
+        }
+        .box{
+            max-width:700px;
+            margin:auto;
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0px 0px 15px rgba(0,0,0,0.1);
+        }
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:15px;
+        }
+        th, td{
+            padding:10px;
+            border:1px solid #ddd;
+            text-align:center;
+        }
+        th{background:#2d7ff9; color:white;}
+        a{
+            display:inline-block;
+            margin-top:15px;
+            text-decoration:none;
+            font-weight:bold;
+            color:#2d7ff9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>My Results 📊</h2>
+
+    {% if results %}
+    <table>
+        <tr>
+            <th>Test</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Correct</th>
+            <th>Wrong</th>
+            <th>Score</th>
+        </tr>
+        {% for r in results %}
+        <tr>
+            <td>{{ r.test.test_name }}</td>
+            <td>{{ r.date_time }}</td>
+            <td>{{ r.total_questions }}</td>
+            <td>{{ r.correct_answers }}</td>
+            <td>{{ r.wrong_answers }}</td>
+            <td><b>{{ r.score }}</b></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+    <a href="{% url 'student_dashboard' %}">⬅ Back</a>
+</div>
+
+</body>
+</html>

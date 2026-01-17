@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f7ff;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+        .box{
+            width:420px;
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0px 0px 15px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+        .score{
+            font-size:24px;
+            font-weight:bold;
+            margin-top:12px;
+        }
+        a{
+            display:inline-block;
+            margin-top:20px;
+            text-decoration:none;
+            font-weight:bold;
+            color:#2d7ff9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Exam Result ✅</h2>
+
+    <p>Total Questions: <b>{{ total }}</b></p>
+    <p>Correct: <b>{{ correct }}</b></p>
+    <p>Wrong: <b>{{ wrong }}</b></p>
+    <p>Not Attempted: <b>{{ not_attempted }}</b></p>
+
+    <div class="score">Final Score: {{ score }}</div>
+
+    <a href="{% url 'student_dashboard' %}">⬅ Back to Dashboard</a>
+</div>
+
+</body>
+</html>

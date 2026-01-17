@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Exam</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f7ff;
+            padding:20px;
+        }
+        .box{
+            max-width:800px;
+            margin:auto;
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0px 0px 15px rgba(0,0,0,0.1);
+        }
+        h2{text-align:center;}
+
+        /* ✅ timer bar */
+        .timer{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:#fff3cd;
+            border:1px solid #ffeeba;
+            padding:12px 15px;
+            border-radius:10px;
+            margin:15px 0 20px 0;
+            font-weight:bold;
+        }
+        #time{
+            color:#dc3545;
+            font-size:18px;
+        }
+
+        .qbox{
+            padding:15px;
+            margin:15px 0;
+            border:1px solid #ddd;
+            border-radius:10px;
+        }
+        .opt{
+            display:block;
+            padding:8px;
+            margin:6px 0;
+            border-radius:8px;
+            background:#f8f9ff;
+        }
+        button{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            font-size:16px;
+            background:#2d7ff9;
+            color:white;
+            cursor:pointer;
+            font-weight:bold;
+        }
+        button:hover{opacity:0.9;}
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>MCQ Exam - {{ test_name }}</h2>
+    <p><b>Marking:</b> +4 correct, -1 wrong, 0 not attempted</p>
+
+    <!-- ✅ TIMER UI -->
+    <div class="timer">
+        <span>⏳ Time Left:</span>
+        <span id="time">00:00</span>
+    </div>
+
+    <form id="examForm" method="POST" action="{% url 'submit_exam' test_id %}">
+
+        {% csrf_token %}
+
+        {% for q in questions %}
+        <div class="qbox">
+            <p><b>{{ forloop.counter }}. {{ q.question }}</b></p>
+
+
+            <label class="opt">
+                <input type="radio" name="q{{q.id}}" value="1"> {{ q.option1 }}
+            </label>
+
+            <label class="opt">
+                <input type="radio" name="q{{q.id}}" value="2"> {{ q.option2 }}
+            </label>
+
+            <label class="opt">
+                <input type="radio" name="q{{q.id}}" value="3"> {{ q.option3 }}
+            </label>
+
+            <label class="opt">
+                <input type="radio" name="q{{q.id}}" value="4"> {{ q.option4 }}
+            </label>
+        </div>
+        {% endfor %}
+
+        <button type="submit">Submit Exam</button>
+    </form>
+</div>
+
+<script>
+    // ✅ exam minutes from views.py
+    let totalSeconds = {{ exam_minutes }} * 60;
+
+    const timeEl = document.getElementById("time");
+    const form = document.getElementById("examForm");
+
+    function formatTime(seconds){
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+
+    timeEl.innerText = formatTime(totalSeconds);
+
+    const timer = setInterval(() => {
+        totalSeconds--;
+        timeEl.innerText = formatTime(totalSeconds);
+
+        if(totalSeconds <= 0){
+            clearInterval(timer);
+            alert("Time Over! Exam Auto Submitted ✅");
+            form.submit();   // ✅ auto submit
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>

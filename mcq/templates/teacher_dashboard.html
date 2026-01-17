@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+</head>
+<body>
+    <h1>Teacher Dashboard</h1>
+    <h2>Welcome {{ request.session.teacher_name }}</h2>
+
+    <a href="{% url 'create_test' %}">🆕 Create New Test</a><br><br>
+    <a href="{% url 'add_question' %}">➕ Add Question</a><br><br>  
+    <a href="{% url 'teacher_results' %}">📊 View Student Results</a><br><br>
+    <a href="{% url 'teacher_tests' %}">📌 View Questions</a><br><br>
+
+    <a href="{% url 'logout' %}">🚪 Logout</a>
+
+    
+</body>
+</html>

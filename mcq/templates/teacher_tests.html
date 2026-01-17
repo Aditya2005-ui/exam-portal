@@ -1,0 +1,10 @@
+<h2>All Tests</h2>
+
+{% for t in tests %}
+  <p>
+    <b>{{t.test_name}}</b> ({{t.duration_minutes}} min)
+    <a href="{% url 'view_questions' t.id %}">View Questions</a>
+  </p>
+{% endfor %}
+
+<a href="{% url 'teacher_dashboard' %}">⬅ Back</a>

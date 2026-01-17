@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:bisque;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+        .box{
+            width:400px;
+            background:rgb(193, 129, 51);
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 0 15px rgba(0,0,0,0.2);
+        }
+        h2{text-align:center;}
+        input{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:1px solid #333;
+            border-radius:10px;
+            font-size:15px;
+        }
+        button{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            font-size:16px;
+            background:#2d7ff9;
+            color:white;
+            cursor:pointer;
+            font-weight:bold;
+        }
+        button:hover{opacity:0.9;}
+        .error{
+            color:red;
+            text-align:center;
+            font-weight:bold;
+        }
+        .loginlink{
+            text-align:center;
+            margin-top:15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Student Registration</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Enter Name" required>
+        <input type="text" name="mob" placeholder="Enter Mobile Number" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div class="loginlink">
+        <p>Already Registered?</p>
+        <a href="{% url 'stu_login' %}">Login Here</a>
+    </div>
+</div>
+
+</body>
+</html>

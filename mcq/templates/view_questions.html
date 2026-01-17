@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Questions</title>
+</head>
+<body>
+    <h2>All Questions</h2>
+
+    {% for q in questions %}
+        <p><b>{{ forloop.counter }}) {{ q.question }}</b></p>
+        <p>1) {{q.option1}}</p>
+        <p>2) {{q.option2}}</p>
+        <p>3) {{q.option3}}</p>
+        <p>4) {{q.option4}}</p>
+        <p><b>Correct:</b> Option {{q.correct_option}}</p>
+
+        <a href="{% url 'edit_question' q.id %}">✏ Edit</a>
+        &nbsp;&nbsp;
+        <a href="{% url 'delete_question' q.id %}"
+        onclick="return confirm('Are you sure you want to delete this question?')">❌ Delete</a>
+
+
+        <hr>
+    {% endfor %}
+
+    <a href="{% url 'teacher_dashboard' %}">⬅ Back</a>
+</body>
+</html>

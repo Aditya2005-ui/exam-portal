@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Login</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f7ff;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+        .box{
+            width:380px;
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0px 0px 15px rgba(0,0,0,0.1);
+        }
+        h2{text-align:center;}
+        input{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:15px;
+        }
+        button{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            background:#28a745;
+            color:white;
+            cursor:pointer;
+            font-weight:bold;
+        }
+        button:hover{opacity:0.9;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Teacher Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="mob" placeholder="Enter Mobile Number" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+            {% if error %}
+            <p style="color:red; text-align:center; font-weight:bold;">{{error}}</p>
+            {% endif %}
+        </form>
+        
+    </div>
+    
+
+</body>
+</html>
