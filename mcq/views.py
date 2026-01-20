@@ -163,7 +163,9 @@ def edit_question(request, id):
 
         return redirect("view_questions", test_id=q.test_id)
 
-    return render(request, "edit_question.html", {"q": q})
+    # ✅ FIX: test_id send to template
+    return render(request, "edit_question.html", {"q": q, "test_id": q.test_id})
+
 
 
 # ---------------- STUDENT: SELECT TEST + EXAM ----------------
