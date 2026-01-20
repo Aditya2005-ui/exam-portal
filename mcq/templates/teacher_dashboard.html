@@ -2,18 +2,79 @@
 <html>
 <head>
     <title>Teacher Dashboard</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            height: 100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .dashboard{
+            background:white;
+            width:420px;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0px 10px 30px rgba(0,0,0,0.3);
+            text-align:center;
+        }
+
+        h1{
+            color:#1e3c72;
+            margin-bottom:5px;
+        }
+
+        h2{
+            font-size:18px;
+            color:#333;
+            margin-bottom:25px;
+        }
+
+        .btn{
+            display:block;
+            text-decoration:none;
+            padding:12px;
+            margin:12px 0;
+            background:#2a5298;
+            color:white;
+            font-size:16px;
+            border-radius:8px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#1e3c72;
+            transform:scale(1.03);
+        }
+
+        .logout{
+            background:#e63946;
+        }
+
+        .logout:hover{
+            background:#b71c1c;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Teacher Dashboard</h1>
-    <h2>Welcome {{ request.session.teacher_name }}</h2>
 
-    <a href="{% url 'create_test' %}">🆕 Create New Test</a><br><br>
-    <a href="{% url 'add_question' %}">➕ Add Question</a><br><br>  
-    <a href="{% url 'teacher_results' %}">📊 View Student Results</a><br><br>
-    <a href="{% url 'teacher_tests' %}">📌 View Questions</a><br><br>
+    <div class="dashboard">
+        <h1>Teacher Dashboard</h1>
+        <h2>Welcome {{ request.session.teacher_name }}</h2>
 
-    <a href="{% url 'logout' %}">🚪 Logout</a>
+        <a class="btn" href="{% url 'create_test' %}">🆕 Create New Test</a>
+        <a class="btn" href="{% url 'add_question' %}">➕ Add Question</a>
+        <a class="btn" href="{% url 'teacher_results' %}">📊 View Student Results</a>
+        <a class="btn" href="{% url 'teacher_tests' %}">📌 View Questions</a>
 
-    
+        <a class="btn logout" href="{% url 'logout' %}">🚪 Logout</a>
+    </div>
+
 </body>
 </html>
+
