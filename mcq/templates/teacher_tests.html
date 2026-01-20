@@ -1,10 +1,115 @@
-<h2>All Tests</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Tests</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #1f4037, #99f2c8);
+            min-height: 100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
 
-{% for t in tests %}
-  <p>
-    <b>{{t.test_name}}</b> ({{t.duration_minutes}} min)
-    <a href="{% url 'view_questions' t.id %}">View Questions</a>
-  </p>
-{% endfor %}
+        .container{
+            width: 520px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+        }
 
-<a href="{% url 'teacher_dashboard' %}">⬅ Back</a>
+        h2{
+            text-align:center;
+            margin-bottom: 25px;
+            color:#1f4037;
+            font-size: 26px;
+        }
+
+        .test-card{
+            padding:15px;
+            margin:15px 0;
+            border:1px solid #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            transition:0.3s;
+        }
+
+        .test-card:hover{
+            background:#e8fff5;
+            transform: scale(1.02);
+            border-color:#1f4037;
+        }
+
+        .test-info{
+            font-size: 16px;
+            color:#222;
+        }
+
+        .test-info b{
+            font-size:18px;
+            color:#1f4037;
+        }
+
+        .view-btn{
+            text-decoration:none;
+            padding:10px 16px;
+            border-radius:8px;
+            background:#1f4037;
+            color:white;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .view-btn:hover{
+            background:#0e2a1f;
+        }
+
+        .back-link{
+            display:block;
+            margin-top:22px;
+            text-align:center;
+            text-decoration:none;
+            font-weight:bold;
+            color:#1f4037;
+            font-size:16px;
+        }
+
+        .back-link:hover{
+            color:#0e2a1f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>All Tests</h2>
+
+        {% for t in tests %}
+        <div class="test-card">
+            
+            <div class="test-info">
+                <b>{{ t.test_name }}</b><br>
+                ⏱ Duration: {{ t.duration_minutes }} min
+            </div>
+
+            <a class="view-btn" href="{% url 'view_questions' t.id %}">
+                View Questions
+            </a>
+
+        </div>
+        {% endfor %}
+
+        <a class="back-link" href="{% url 'teacher_dashboard' %}">⬅ Back</a>
+
+    </div>
+</body>
+</html>
+

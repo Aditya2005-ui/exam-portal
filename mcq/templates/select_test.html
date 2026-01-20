@@ -1,11 +1,110 @@
-<h2>Select Test</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Test</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
 
-{% for t in tests %}
-  <div style="padding:10px; margin:10px; background:white; border:1px solid #ddd;">
-    <b>{{ t.test_name }}</b> ({{ t.duration_minutes }} min)
-    <a href="{% url 'start_exam' t.id %}">Start</a>
-  </div>
-{% endfor %}
+        .container{
+            width: 520px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.35);
+        }
 
-<br>
-<a href="{% url 'student_dashboard' %}">⬅ Back</a>
+        h2{
+            text-align:center;
+            margin-bottom: 25px;
+            color:#0f2027;
+            font-size: 26px;
+        }
+
+        .test-card{
+            padding:15px;
+            margin:15px 0;
+            border:1px solid #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            transition:0.3s;
+        }
+
+        .test-card:hover{
+            background:#e3f2fd;
+            transform: scale(1.02);
+            border-color:#2c5364;
+        }
+
+        .test-info{
+            font-size: 16px;
+            color:#222;
+        }
+
+        .test-info b{
+            font-size:18px;
+            color:#0f2027;
+        }
+
+        .start-btn{
+            text-decoration:none;
+            padding:10px 18px;
+            border-radius:8px;
+            background:#2c5364;
+            color:white;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .start-btn:hover{
+            background:#0f2027;
+        }
+
+        .back-link{
+            display:block;
+            margin-top:20px;
+            text-align:center;
+            text-decoration:none;
+            font-weight:bold;
+            color:#2c5364;
+        }
+
+        .back-link:hover{
+            color:#0f2027;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>Select Test</h2>
+
+        {% for t in tests %}
+        <div class="test-card">
+
+            <div class="test-info">
+                <b>{{ t.test_name }}</b><br>
+                ⏱ Duration: {{ t.duration_minutes }} min
+            </div>
+
+            <a class="start-btn" href="{% url 'start_exam' t.id %}">Start</a>
+        </div>
+        {% endfor %}
+
+        <a class="back-link" href="{% url 'student_dashboard' %}">⬅ Back</a>
+
+    </div>
+</body>
+</html>

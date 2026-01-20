@@ -1,9 +1,100 @@
-<h2>Create New Test</h2>
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="test_name" placeholder="Test Name" required>
-    <input type="number" name="duration_minutes" placeholder="Duration Minutes" required>
-    <button type="submit">Create Test</button>
-</form>
-<br>
-<a href="{% url 'teacher_dashboard' %}">⬅ Back</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create New Test</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            min-height: 100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .container{
+            width: 420px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.35);
+            text-align:center;
+        }
+
+        h2{
+            color:#182848;
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+
+        form{
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+        }
+
+        input{
+            padding:12px;
+            font-size:16px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            outline:none;
+            transition:0.3s;
+        }
+
+        input:focus{
+            border-color:#4b6cb7;
+            box-shadow: 0px 0px 8px rgba(75,108,183,0.6);
+        }
+
+        button{
+            padding:12px;
+            font-size:16px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            background:#4b6cb7;
+            color:white;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#182848;
+            transform: scale(1.02);
+        }
+
+        .back-link{
+            display:block;
+            margin-top:20px;
+            text-decoration:none;
+            font-weight:bold;
+            color:#4b6cb7;
+            font-size:16px;
+        }
+
+        .back-link:hover{
+            color:#182848;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Create New Test</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="test_name" placeholder="Test Name" required>
+            <input type="number" name="duration_minutes" placeholder="Duration (Minutes)" required>
+
+            <button type="submit">✅ Create Test</button>
+        </form>
+
+        <a class="back-link" href="{% url 'teacher_dashboard' %}">⬅ Back</a>
+    </div>
+</body>
+</html>
