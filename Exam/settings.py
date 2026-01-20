@@ -24,10 +24,9 @@ DEBUG = True
 # ✅ Render + Local
 ALLOWED_HOSTS = [
     "exam-portal-1-7ha0.onrender.com",
-    "127.0.0.1",
     "localhost",
+    "127.0.0.1",
 ]
-
 
 # ==========================
 # INSTALLED APPS
@@ -90,11 +89,10 @@ WSGI_APPLICATION = "Exam.wsgi.application"
 # ==========================
 MYSQL_PUBLIC_URL = os.environ.get("MYSQL_PUBLIC_URL")
 
-if MYSQL_PUBLIC_URL:
-    # ✅ Railway public url -> parse करून connect
-    url = urlparse(MYSQL_PUBLIC_URL)
 
-    DATABASES = {
+url = urlparse(MYSQL_PUBLIC_URL)
+
+DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": url.path[1:],  # "/railway" -> "railway"
@@ -104,15 +102,6 @@ if MYSQL_PUBLIC_URL:
             "PORT": url.port,      # 44186
         }
     }
-else:
-    # ✅ Local fallback (SQLite)
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-
 
 # ==========================
 # PASSWORD VALIDATION
