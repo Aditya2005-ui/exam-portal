@@ -1,67 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
-    <style>
-        body{
-            
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-        }
-        .box{
-            width:420px;
-            background:white;
-            padding:30px;
-            border-radius:12px;
-            box-shadow:0px 0px 15px rgba(0,0,0,0.1);
-            text-align:center;
-        }
-        h2{
-            margin-bottom:25px;
-        }
-        .btn{
-            display:block;
-            width:100%;
-            padding:12px;
-            margin:12px 0;
-            border:none;
-            border-radius:10px;
-            font-size:16px;
-            cursor:pointer;
-            font-weight:bold;
-            text-decoration:none;
-            color:white;
-        }
-        .start{ background:#2d7ff9; }
-        .result{ background:#28a745; }
-        .logout{ background:#dc3545; }
+{% extends "base.html" %}
+{% block content %}
 
-        .btn:hover{ opacity:0.9; }
+<h2>Student Dashboard</h2>
 
-        .name{
-            font-size:18px;
-            margin-bottom:18px;
-        }
-    </style>
-</head>
-<body>
+<p>Welcome {{request.session.student_name}}</p>
 
-<div class="box">
-    <h2>Student Dashboard</h2>
+<a class="btn primary" href="{% url 'select_test' %}">Start Exam</a>
+<a class="btn success" href="{% url 'my_result' %}">My Results</a>
+<a class="btn danger" href="{% url 'logout' %}">Logout</a>
 
-    <p class="name">Welcome, <b>{{ request.session.student_name }}</b> ✅</p>
-
-    <a class="btn start" href="{% url 'select_test' %}">📝 Start Exam</a>
-    <a class="btn result" href="{% url 'my_result' %}">📊 My Results</a>
-    <a class="btn logout" href="{% url 'logout' %}">🚪 Logout</a>
-
-</div>
-
-</body>
-</html>
+{% endblock %}
