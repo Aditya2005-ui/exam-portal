@@ -92,17 +92,11 @@ MYSQL_PUBLIC_URL = os.environ.get("MYSQL_PUBLIC_URL")
 
 url = urlparse(MYSQL_PUBLIC_URL)
 
-DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": url.path[1:],  # "/railway" -> "railway"
-            "USER": url.username,
-            "PASSWORD": url.password,
-            "HOST": url.hostname,  # maglev.proxy.rlwy.net
-            "PORT": url.port,      # 44186
-        }
-    }
+import dj_database_url
 
+DATABASES = {
+    'default': dj_database_url.config(default='')
+}
 # ==========================
 # PASSWORD VALIDATION
 # ==========================
