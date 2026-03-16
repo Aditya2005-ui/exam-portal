@@ -10,6 +10,30 @@
 
 <h3>Score: {{score}}</h3>
 
+<hr>
+
+<h3>Answer Review</h3>
+
+{% for a in answers %}
+
+<div class="card">
+
+<b>{{forloop.counter}}. {{a.question}}</b><br><br>
+
+1) {{a.option1}} <br>
+2) {{a.option2}} <br>
+3) {{a.option3}} <br>
+4) {{a.option4}} <br><br>
+
+<b>Your Answer:</b> {{a.user_answer}} <br>
+<b>Correct Answer:</b> {{a.correct_answer}}
+
+</div>
+
+<br>
+
+{% endfor %}
+
 <a href="{% url 'student_dashboard' %}">Back</a>
 
 {% endblock %}

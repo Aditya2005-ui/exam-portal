@@ -320,8 +320,7 @@ def submit_exam(request, test_id):
 
     student_id = request.session["student_id"]
 
-    if Result.objects.filter(student_id=student_id,
-                             test_id=test_id).exists():
+    if Result.objects.filter(student_id=student_id, test_id=test_id).exists():
         return render(request, "already_attempted.html")
 
     if request.method == "POST":
@@ -333,18 +332,35 @@ def submit_exam(request, test_id):
         wrong_answers = 0
         not_attempted = 0
 
+        answer_review = []   # ⭐ store answers for result page
+
         for q in questions:
 
             selected = request.POST.get(f"q{q.id}")
 
             if selected is None:
                 not_attempted += 1
-
-            elif int(selected) == q.correct_option:
-                correct_answers += 1
+                user_option = "Not Attempted"
 
             else:
-                wrong_answers += 1
+                selected = int(selected)
+
+                if selected == q.correct_option:
+                    correct_answers += 1
+                else:
+                    wrong_answers += 1
+
+                user_option = selected
+
+            answer_review.append({
+                "question": q.question,
+                "option1": q.option1,
+                "option2": q.option2,
+                "option3": q.option3,
+                "option4": q.option4,
+                "user_answer": user_option,
+                "correct_answer": q.correct_option
+            })
 
         score = (correct_answers * 4) - (wrong_answers * 1)
 
@@ -362,11 +378,11 @@ def submit_exam(request, test_id):
             "correct": correct_answers,
             "wrong": wrong_answers,
             "not_attempted": not_attempted,
-            "score": score
+            "score": score,
+            "answers": answer_review
         })
 
     return redirect("start_exam", test_id=test_id)
-
 
 # =========================
 # STUDENT RESULT PAGE
